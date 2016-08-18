@@ -1,0 +1,44 @@
+<html>
+<head>
+  <link rel="stylesheet" href="../node_modules/reveal.js/css/reveal.css">
+  <link rel="stylesheet" href="../node_modules/reveal.js/css/theme/black.css">
+  <link rel="stylesheet" href="../node_modules/reveal.js/lib/css/zenburn.css">
+  <title>ES6 @ edX</title>
+</head>
+<body>
+  <div class="reveal">
+    <div class="slides">
+      <section
+        data-markdown="talk.md"
+        data-separator="---"
+        data-separator-notes="^Notes:"
+      >
+      </section>
+    </div>
+</div>
+<script src="../node_modules/reveal.js/lib/js/head.min.js"></script>
+<script src="../node_modules/reveal.js/js/reveal.js"></script>
+<script>
+  Reveal.initialize({
+    controls: false,
+    progress: false,
+    history: true,
+    transitionSpeed: 'fast',
+    dependencies: [{
+      src: '../node_modules/reveal.js/plugin/notes/notes.js',
+      async: true
+    }, {
+      src: '../node_modules/reveal.js/plugin/markdown/marked.js',
+      condition: () => !!document.querySelector('[data-markdown]')
+    }, {
+      src: '../node_modules/reveal.js/plugin/markdown/markdown.js',
+      condition: () => !!document.querySelector('[data-markdown]')
+    }, {
+      src: '../node_modules/reveal.js/plugin/highlight/highlight.js',
+      async: true,
+      callback: () => hljs.initHighlightingOnLoad()
+    },]
+  });
+</script>
+</body>
+</html>
