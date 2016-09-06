@@ -1,0 +1,19 @@
+.reveal.bj-theme {
+  h1, h2, h3, h4, h5, h6 {
+    text-transform: unset;
+  }
+
+  section {
+    img {
+      border: none;
+    }
+
+    pre code {
+      max-height: 700px;
+    }
+
+    li ul li {
+      font-size: 2rem;
+    }
+  }
+}
