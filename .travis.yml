@@ -1,5 +1,22 @@
 language: node_js
+sudo: false
+cache:
+  directories:
+  - node_modules
 install:
-  - npm install --production
+  - npm install --development
 script:
+  - echo "no script"
+before_deploy:
   - npm run sass
+deploy:
+  skip_cleanup: true
+  provider: s3
+  region: us-east-1
+  bucket: talks.bjacobel.com
+  acl: public_read
+after_deploy:
+  - pip install --user awscli
+  - export PATH=$PATH:$HOME/.local/bin
+  - aws configure set preview.cloudfront true
+  - aws cloudfront create-invalidation --distribution-id E3CGZFRSLEY54L --paths /*
