@@ -4,6 +4,7 @@
   "description": "hosting of slideshows",
   "scripts": {
     "start": "http-server & node-sass --watch -r theme/ -o theme/",
+    "sass": "node-sass -r theme/ -o theme/",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Brian Jacobel <bjacobel@gmail.com>",
