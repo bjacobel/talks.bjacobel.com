@@ -92,13 +92,33 @@ bar = 'bar-ish';	// `TypeError: Assignment to constant variable.`
 
 ```
 // es5
+var foo = 'foo';
 
+if (foo) {
+	var foo;  // redefinition?
+	foo = 'not foo,';  // am I mutating, or is this foo new?
+
+	var bar = 'bar';  // Should this be local just to this function?
+}
+
+console.log(foo, bar);  // ????? "not foo, bar"
 ```
 ---
+
 #### `let` and `const`
 
 ```
 // es6
+const foo = 'foo';
+let bar;
+
+if(foo) {
+	const foo = 'not foo!'; // not redefinition - a new `foo` in a new scope ("shadowing")
+
+	const bar = 'bar';
+}
+
+console.log(foo, bar);  // foo hasn't changed, bar is scoped properly (ie, undefined here)
 
 ```
 ---
@@ -287,9 +307,9 @@ export default class Thing extends Component {
 #### Babel
 
 - "Transpiles" ES6 into ES5
-- uses presets - target specific features, or a spec version
-	- e.g., `babel-preset-es2015` or `babel`
-- Tightly integrated with tools like [RequireJS](https://github.com/mikach/requirejs-babel), Karma, etc
+- uses presets and plugins - target specific features, or a spec version
+	- e.g., `babel-preset-es2015` or `babel-plugin-transform-object-assign`
+- Tightly integrated with tools like RequireJS, Karma, Webpack, etc
 - No compatibility issues with old libraries, because everything runs in ES5
 - Sets us up to gradually include features from ES7 and ESNext
 
@@ -315,4 +335,5 @@ export default class Thing extends Component {
 - Gradual, compatible upgrade path (we've already started!)
 - Lets us build faster, easier, and with less head-scratching
 - Aligns us with the community
+- Allows us to start reaching towards other modern FE tech like React
 - One of the most significant things we can do to modernize Javascript at edX
