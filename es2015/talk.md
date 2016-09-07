@@ -1,6 +1,6 @@
-### ES6 @ edX
+### ES2015 @ edX
 
-![](assets/es6.png)
+![](assets/es2015.png)
 
 ---
 
@@ -40,7 +40,7 @@
 
 ---
 
-#### ES6 is not any of those things.
+#### ES2015 is not any of those things.
 
 - the next generation of the Javascript you already know
 - works with existing tools, doesn't add any complexity to development process
@@ -52,12 +52,14 @@
 ---
 
 #### Terminology
-- ES6 === ECMAScript 6
-- === ES2015 === ECMAScript 2015 <!-- .element: class="fragment" data-fragment-index="1" -->
-- ES7 === ES2016 <!-- .element: class="fragment" data-fragment-index="2" -->
-- ES2016 !== ES6 <!-- .element: class="fragment" data-fragment-index="3" -->
-- TC39 favors year nomenclature to emphasize rolling spec (ECMA-262) <!-- .element: class="fragment" data-fragment-index="4" -->
-- Most people in the community call it ES6 <!-- .element: class="fragment" data-fragment-index="5" -->
+- ECMAScript is the spec (Python)
+- JavaScript is an implementation (CPython, PyPy)
+- ES5 is what we write now
+- ES2015 is the next jump forward
+	- Used to be called ES6, changed to emphasize yearly model
+- TC39 will approve ES2016 this fall (not ES7!) <!-- .element: class="fragment" data-fragment-index="2" -->
+- Future versions (ES2017), approval/cutoff process <!-- .element: class="fragment" data-fragment-index="3" -->
+	- sometimes called ESNext <!-- .element: class="fragment" data-fragment-index="3" -->
 
 ---
 
@@ -65,7 +67,7 @@
 
 #### `let` and `const`
 ```
-// es5
+// ES5
 var foo = 'foo';
 var bar = 'bar':
 
@@ -73,7 +75,7 @@ foo = 'foo-ish;
 bar = 'bar-ish';
 ```
 ```
-// es6
+// ES2015
 let foo = 'foo';
 const bar = 'bar';
 
@@ -91,14 +93,14 @@ bar = 'bar-ish';	// `TypeError: Assignment to constant variable.`
 #### `let` and `const`
 
 ```
-// es5
+// ES5
 var foo = 'foo';
 
 if (foo) {
 	var foo;  // redefinition?
 	foo = 'not foo,';  // am I mutating, or is this foo new?
 
-	var bar = 'bar';  // Should this be local just to this function?
+	var bar = 'bar';  // Should this be local just to this block?
 }
 
 console.log(foo, bar);  // ????? "not foo, bar"
@@ -108,7 +110,7 @@ console.log(foo, bar);  // ????? "not foo, bar"
 #### `let` and `const`
 
 ```
-// es6
+// ES2015
 const foo = 'foo';
 let bar;
 
@@ -128,10 +130,10 @@ console.log(foo, bar);  // foo hasn't changed, bar is scoped properly (ie, undef
 
 #### Template strings
 ```
-// es5
+// ES5
 var string = 'this is a " +	bleep + " dumb way to have to do this';
 
-// es6
+// ES2015
 const string = `I can template ${anything} that implements toString`;
 ```
 ---
@@ -140,7 +142,7 @@ const string = `I can template ${anything} that implements toString`;
 
 #### Destructuring and Rest/Spread
 ```
-// es6
+// ES2015
 const { foo, bar } = objectWithManyKeys;	// object destructuring
 
 const [first, ...rest] = bigArray;	//array destructuring, rest
@@ -159,13 +161,13 @@ requiresFiveArgs(...arrayWithFiveElements);	// spread
 
 #### Arrow functions
 ```
-// es5
+// ES5
 var getFoo = function(obj) {
 	return obj.foo;
 };
 ```
 ```
-// es6
+// ES2015
 const getFoo = (obj) => {
 	return obj.foo;
 };
@@ -183,7 +185,7 @@ const getFoo = obj => obj.foo;
 - Retains scope of caller for `this`
 
 ```
-// es5
+// ES5
 var render = function() {
 	var self = this;
 
@@ -193,7 +195,7 @@ var render = function() {
 }
 ```
 ```
-// es6
+// ES2015
 const render = () => {
 	const beforeRender = () => {
 		preprocess(this);
@@ -207,7 +209,7 @@ const render = () => {
 
 #### Classes
 ```
-// es5
+// ES5
 function Bike(gears) {};
 Bike.prototype.shift = function(newGearIndex) {
 	...
@@ -224,7 +226,7 @@ fixie.shift();
 ---
 #### Classes
 ```
-// es6
+// ES2015
 class Bike {
 	constructor(...gears) {
 		this.gears = gears;
@@ -287,7 +289,7 @@ export default class Thing extends Component {
 
 - `Object.keys` / `Object.values`
 - `Object.assign`
-- `Array.map`, `.filter`, `.find`, `.includes`
+- `Array.map`, `.filter`, `.find`, `.includes` (ES2016)
 - `for (... of ...)`
 - `Map` / `Set`
 - default parameters
@@ -297,30 +299,30 @@ export default class Thing extends Component {
 #### Browsers
 
 - Browser vendors are slow.
-- ES6 spec was finalized in 2015, most "good" browsers implement 80%+ of spec
+- Most "good" browsers implement 80%+ of ES2015 spec
 	- Outliers: Safari 8, IE11
-- We can't write ES6 and ship it to production, _yet_
+- We can't write ES2015 and ship it to production, _yet_
 	- In the meantime, we'll use Babel
 
 ---
 
 #### Babel
 
-- "Transpiles" ES6 into ES5
+- "Transpiles" code - e.g., ES2016 into ES5
 - uses presets and plugins - target specific features, or a spec version
-	- e.g., `babel-preset-es2015` or `babel-plugin-transform-object-assign`
+	- e.g., `babel-preset-es2015` or `babel-plugin-array-includes`
 - Tightly integrated with tools like RequireJS, Karma, Webpack, etc
 - No compatibility issues with old libraries, because everything runs in ES5
-- Sets us up to gradually include features from ES7 and ESNext
+- Sets us up to gradually include features from ES2016 and ESNext
 
 ---
 
 
 #### Community support
-- Most industry giants are using ES6
+- Most industry giants are using ES2015
 - Most schools/programs are teaching it
 - Most documentation/examples assume you're using it
-- Most new open-source JS tools are written using it
+- Most popular open-source JS tools are written using it
 - Most JavaScript engineers are looking for jobs writing it
 - Community standard for a year or more, so buying in has effects on:
 	- Inclusiveness
@@ -331,9 +333,9 @@ export default class Thing extends Component {
 
 
 #### Summary
-- Think less Coffeescript, more Python 3 or C++ 14
+- Not a different language, just a better version of it
 - Gradual, compatible upgrade path (we've already started!)
 - Lets us build faster, easier, and with less head-scratching
 - Aligns us with the community
 - Allows us to start reaching towards other modern FE tech like React
-- One of the most significant things we can do to modernize Javascript at edX
+- One of the most significant things we can do to modernize front-end tech at edX
