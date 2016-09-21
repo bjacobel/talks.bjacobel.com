@@ -20,23 +20,12 @@
 - Immutable.js
 - Vue
 - Ramda
+- RxJS
 - Electron
 - JSX
 - CSS Modules
 - ESNext
 - Angular 2
-
----
-
-"You need to rebuild your app in isomorphic Mithril with pure functional stateless components and IcedLatteScript."
-
----
-
-... Why?
-
----
-
-"Because it's the *future*!"
 
 ---
 
@@ -52,20 +41,25 @@
 ---
 
 #### Terminology
-- ECMAScript is the spec (Python)
+- ECMA writes the ECMAScript spec
 - JavaScript is an implementation (CPython, PyPy)
-- ES5 is what we write now
-- ES2015 is the next jump forward
-	- Used to be called ES6, changed to emphasize yearly model
+- ES5 is what we write now <!-- .element: class="fragment" data-fragment-index="1" -->
+- ES2015 is the next jump forward <!-- .element: class="fragment" data-fragment-index="1" -->
+	- Used to be called ES6, changed to emphasize yearly model <!-- .element: class="fragment" data-fragment-index="1" -->
 - TC39 will approve ES2016 this fall (not ES7!) <!-- .element: class="fragment" data-fragment-index="2" -->
 - Future versions (ES2017), approval/cutoff process <!-- .element: class="fragment" data-fragment-index="3" -->
-	- sometimes called ESNext <!-- .element: class="fragment" data-fragment-index="3" -->
+
+---
+
+##Inside ES2015 <!-- .element: class="imp"-->
 
 ---
 
 
 
 #### `let` and `const`
+(say `hello world` to the new `var`)
+
 ```
 // ES5
 var foo = 'foo';
@@ -74,6 +68,8 @@ var bar = 'bar':
 foo = 'foo-ish;
 bar = 'bar-ish';
 ```
+<!-- .element: class="fragment" data-fragment-index="2" -->
+
 ```
 // ES2015
 let foo = 'foo';
@@ -82,6 +78,7 @@ const bar = 'bar';
 foo = 'foo-ish';	// Still OK, `let` allows reassignment
 bar = 'bar-ish';	// `TypeError: Assignment to constant variable.`
 ```
+<!-- .element: class="fragment" data-fragment-index="3" -->
 ---
 #### `let` and `const`
 - Having a constant type is nice
@@ -114,7 +111,7 @@ console.log(foo, bar);  // ????? "not foo, bar"
 const foo = 'foo';
 let bar;
 
-if(foo) {
+if (foo) {
 	const foo = 'not foo!'; // not redefinition - a new `foo` in a new scope ("shadowing")
 
 	const bar = 'bar';
@@ -124,39 +121,6 @@ console.log(foo, bar);  // foo hasn't changed, bar is scoped properly (ie, undef
 
 ```
 ---
-
-
-
-
-#### Template strings
-```
-// ES5
-var string = 'this is a " +	bleep + " dumb way to have to do this';
-
-// ES2015
-const string = `I can template ${anything} that implements toString`;
-```
----
-
-
-
-#### Destructuring and Rest/Spread
-```
-// ES2015
-const { foo, bar } = objectWithManyKeys;	// object destructuring
-
-const [first, ...rest] = bigArray;	//array destructuring, rest
-
-const canTakeManyArgs = (...params) => {	// rest
-	params.forEach((param) => {
-		...
-	});
-});
-
-requiresFiveArgs(...arrayWithFiveElements);	// spread
-```
----
-
 
 
 #### Arrow functions
@@ -172,12 +136,13 @@ const getFoo = (obj) => {
 	return obj.foo;
 };
 ```
+<!-- .element: class="fragment" data-fragment-index="1" -->
 
 ```
 // Shorthand!
 const getFoo = obj => obj.foo;
 ```
-<!-- .element: class="fragment" data-fragment-index="1" -->
+<!-- .element: class="fragment" data-fragment-index="2" -->
 ---
 #### Arrow functions
 
@@ -205,6 +170,37 @@ const render = () => {
 <!-- .element: class="fragment" data-fragment-index="1" -->
 ---
 
+
+
+
+#### Template strings
+```
+// ES5
+var string = 'this is a ' + bleep + ' dumb way to have to do this';
+
+// ES2015
+const string = `I can template ${anything} that implements toString`;
+```
+---
+
+
+
+#### Destructuring and Rest/Spread
+```
+// ES2015
+const { foo, bar } = objectWithManyKeys;	// object destructuring
+
+const [first, ...rest] = bigArray;	//array destructuring, rest
+
+const canTakeManyArgs = (...params) => {	// rest
+	params.forEach((param) => {
+		...
+	});
+});
+
+requiresFiveArgs(...arrayWithFiveElements);	// spread
+```
+---
 
 
 #### Classes

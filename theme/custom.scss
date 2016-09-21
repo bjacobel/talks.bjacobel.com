@@ -4,6 +4,9 @@
   }
 
   section {
+    height: 100%;
+    display: table;
+
     img {
       border: none;
     }
@@ -12,8 +15,20 @@
       max-height: 700px;
     }
 
-    li ul li {
-      font-size: 2rem;
+    li {
+      margin-bottom: 15px;
+
+      ul li {
+        font-size: 2rem;
+      }
+    }
+
+    .imp {
+      font-size: 130%;
+      display:flex;
+      justify-content:center;
+      align-items:center;
+      height:100%;
     }
   }
 }
