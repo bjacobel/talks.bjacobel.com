@@ -19,4 +19,4 @@ after_deploy:
   - pip install --user awscli
   - export PATH=$PATH:$HOME/.local/bin
   - aws configure set preview.cloudfront true
-  - aws cloudfront create-invalidation --distribution-id E3CGZFRSLEY54L --paths /*
+  - aws cloudfront create-invalidation --distribution-id E3CGZFRSLEY54L --paths "/*"
