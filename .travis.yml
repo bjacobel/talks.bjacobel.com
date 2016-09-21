@@ -9,6 +9,8 @@ script:
   - echo "no script"
 before_deploy:
   - npm run sass
+  - rm -rf node_modules
+  - npm install --production
 deploy:
   skip_cleanup: true
   provider: s3
