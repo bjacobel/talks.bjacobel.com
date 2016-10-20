@@ -1,127 +1,148 @@
 ### ES2015 @ edX
 
-![](assets/es2015.png)
+![](https://upload.wikimedia.org/wikipedia/commons/thumb/9/99/Unofficial_JavaScript_logo_2.svg/480px-Unofficial_JavaScript_logo_2.svg.png)
 
 ---
 
-#### The JS ecosystem in 2016
-
-- React
-- Redux
-- Flow
-- Jest
-- Elm
-- Webpack
-- CommonJS
-- Typescript
-- ESLint
-- Babel
-- Mithril
-- Immutable.js
-- Vue
-- Ramda
-- RxJS
-- Electron
-- JSX
-- CSS Modules
-- ESNext
-- Angular 2
+- Overview
+- High-level motivations
+- Technical exploration
+- Path to adoption
 
 ---
 
-#### ES2015 is not any of those things.
-
-- the next generation of the Javascript you already know
-- works with existing tools, doesn't add any complexity to development process
-- All the same stuff you already know how to do, just:
-	- cleaner
-	- easier
-	- more predictable
-
----
-
-#### Terminology
-- ECMA writes the ECMAScript spec
-- JavaScript is an implementation (CPython, PyPy)
-- ES5 is what we write now <!-- .element: class="fragment" data-fragment-index="1" -->
+### Overview: Terminology
+- JavaScript is an implementation of the ECMAScript spec
+- ES5 (2009) is what we write now
 - ES2015 is the next jump forward <!-- .element: class="fragment" data-fragment-index="1" -->
-	- Used to be called ES6, changed to emphasize yearly model <!-- .element: class="fragment" data-fragment-index="1" -->
-- TC39 will approve ES2016 this fall (not ES7!) <!-- .element: class="fragment" data-fragment-index="2" -->
-- Future versions (ES2017), approval/cutoff process <!-- .element: class="fragment" data-fragment-index="3" -->
+	- Previously called ES6 <!-- .element: class="fragment" data-fragment-index="1" -->
+- ES2016, 2017 <!-- .element: class="fragment" data-fragment-index="2" -->
 
 ---
 
-##Inside ES2015 <!-- .element: class="imp"-->
+### Overview: Guiding principles
+- 100% backwards compatibility
+- Refine, don't reinvent
+- Draw on good ideas from JS community
+	- Beefing up stdlib (Underscore) <!-- .element: class="fragment" data-fragment-index="2" -->
+	- Need for friendlier inheritance (Coffeescript) <!-- .element: class="fragment" data-fragment-index="3" -->
 
 ---
 
+### Overview: History
+- Coffeescript 😬😷
+	- In use at edX ~2011-2015, currently being removed
+	- Promised many of the same things as ES2015
+	- Ultimately failed
+- ES2015 borrows Coffeescript's best ideas
+- Went through the right process, has the community's support
 
+---
+
+### Motivations: Community
+- Industry leaders are using ES2015
+	- Google, Apple, Facebook, Airbnb, Uber
+	- Coursera, Udemy
+- Most documentation/examples assume you're using it
+- Most JavaScript engineers are looking for jobs writing it
+- Community standard for a year or more
+
+---
+
+http://stateofjs.com/2016/flavors/ <!-- .element: class="light" -->
+
+![](https://i.bjacobel.com/20161020-z2uzs.png) <!-- .element: height="85%" -->
+
+---
+
+### Motivations: Development
+
+- Works with existing tools
+- Doesn't add any complexity to development process
+- Produces code that's:
+	- cleaner to read
+	- easier to write
+	- more predictable to execute
+
+---
+
+## Technical exploration: inside ES2015 <!-- .element: class="imp"-->
+
+---
 
 #### `let` and `const`
-(say `hello world` to the new `var`)
 
 ```
 // ES5
 var foo = 'foo';
 var bar = 'bar':
-
-foo = 'foo-ish;
-bar = 'bar-ish';
 ```
-<!-- .element: class="fragment" data-fragment-index="2" -->
+<!-- .element: class="left-code" -->
 
 ```
 // ES2015
 let foo = 'foo';
 const bar = 'bar';
-
-foo = 'foo-ish';	// Still OK, `let` allows reassignment
-bar = 'bar-ish';	// `TypeError: Assignment to constant variable.`
 ```
-<!-- .element: class="fragment" data-fragment-index="3" -->
+<!-- .element: class="right-code" -->
+
+```
+foo = 'foo-ish';
+bar = 'bar-ish';
+```
+<!-- .element: class="left-code fragment" data-fragment-index="1" -->
+
+```
+// OK, `let` allows reassignment
+foo = 'foo-ish';
+
+// `TypeError: Assignment to constant variable.`
+bar = 'bar-ish';
+```
+<!-- .element: class="right-code fragment" data-fragment-index="1" -->
+
 ---
+
 #### `let` and `const`
 - Having a constant type is nice
-	- Mutation is slow
-	- Can catch errors
-- Properly scoped (!)
+	- Could catch an error
+- Properly block-scoped (!)
+
+![](https://i.bjacobel.com/20161020-i1w9p.png) <!-- .element: height="450px" -->
 
 ---
+
 #### `let` and `const`
 
 ```
 // ES5
 var foo = 'foo';
 
-if (foo) {
-	var foo;  // redefinition?
-	foo = 'not foo,';  // am I mutating, or is this foo new?
-
-	var bar = 'bar';  // Should this be local just to this block?
+if (true) {
+	var foo = 'bar'
 }
 
-console.log(foo, bar);  // ????? "not foo, bar"
+console.log('foo is', foo);
+// ->> foo is bar
+// ??!!!!
 ```
----
-
-#### `let` and `const`
+<!-- .element: class="left-code" -->
 
 ```
 // ES2015
-const foo = 'foo';
-let bar;
+let foo = 'foo';
 
-if (foo) {
-	const foo = 'not foo!'; // not redefinition - a new `foo` in a new scope ("shadowing")
-
-	const bar = 'bar';
+if (true) {
+	let foo = 'bar';
 }
 
-console.log(foo, bar);  // foo hasn't changed, bar is scoped properly (ie, undefined here)
-
+console.log('foo is', foo);
+// ->> foo is foo
+// 👌
 ```
----
+<!-- .element: class="left-code" -->
 
+---
 
 #### Arrow functions
 ```
@@ -130,24 +151,27 @@ var getFoo = function(obj) {
 	return obj.foo;
 };
 ```
+<!-- .element: class="left-code" -->
+
 ```
 // ES2015
 const getFoo = (obj) => {
 	return obj.foo;
 };
 ```
-<!-- .element: class="fragment" data-fragment-index="1" -->
+<!-- .element: class="right-code"-->
 
 ```
 // Shorthand!
 const getFoo = obj => obj.foo;
 ```
-<!-- .element: class="fragment" data-fragment-index="2" -->
+<!-- .element: class="right-code fragment" data-fragment-index="1" -->
+
 ---
 #### Arrow functions
 
 - It's shorter (especially with the shorthand)
-- Retains scope of caller for `this`
+- Pass `this` lexically, removes a major source of confusion
 
 ```
 // ES5
@@ -159,6 +183,8 @@ var render = function() {
 	};
 }
 ```
+<!-- .element: class="left-code"-->
+
 ```
 // ES2015
 const render = () => {
@@ -167,41 +193,24 @@ const render = () => {
 	}
 };
 ```
-<!-- .element: class="fragment" data-fragment-index="1" -->
+<!-- .element: class="right-code"-->
+
 ---
-
-
-
 
 #### Template strings
 ```
 // ES5
-var string = 'this is a ' + bleep + ' dumb way to have to do this';
+var site = 'edx.org';
+var name = 'Brian';
+console.log('Welcome to ' + site + ', ' + name + '!');
 
 // ES2015
-const string = `I can template ${anything} that implements toString`;
+const site = 'edx.org';
+const name = 'Brian';
+console.log(`Welcome to ${site}, ${name}!`);
 ```
+
 ---
-
-
-
-#### Destructuring and Rest/Spread
-```
-// ES2015
-const { foo, bar } = objectWithManyKeys;	// object destructuring
-
-const [first, ...rest] = bigArray;	//array destructuring, rest
-
-const canTakeManyArgs = (...params) => {	// rest
-	params.forEach((param) => {
-		...
-	});
-});
-
-requiresFiveArgs(...arrayWithFiveElements);	// spread
-```
----
-
 
 #### Classes
 ```
@@ -217,7 +226,9 @@ Fixie.prototype = Object.create(Bike.prototype);
 var fixie = new Fixie();
 fixie.shift();
 ```
+- Functions and prototypes?
 - Non-intuitive and messy.
+- Especially bad in our CS->JS Backbone code
 
 ---
 #### Classes
@@ -232,106 +243,90 @@ class Bike {
 		this.currentGear = this.gears[0];
 		this.riding = true;
 	}
-
-	shift(newGearIndex) {
-		this.currentGear = this.gears[newGearIndex];
-	}
 }
 
-const bike = new Bike(1.5, 2.7, 3.1, 4.2);
-bike.start();
-bike.shift(2);
-```
----
-#### Classes
-```
 class Fixie extends Bike {
 	constructor() {
 		super(3.4);
-	}
-
-	shift() {
-		throw new Error("You're on a fixie!");
 	}
 }
 
 const fixie = new Fixie();
 fixie.start();
-fixie.shift();	// error!
 ```
 
 ---
+
 #### Classes
 - Nothing you couldn't do before
-- Cleaner syntax, smoothes over some of the idisyncracies of JS inheritance
-- Many libraries have bought heavily into classes
-
-```
-import React, { Component } from 'react';
-
-export default class Thing extends Component {
-	render() {
-		return <h1>{ this.props.thingText }</h1>;
-	}
-}
-```
-<!-- .element: class="fragment" data-fragment-index="1" -->
+- Cleaner syntax, smoothes over some of the idiosyncrasies of JS inheritance
+- Implications for how we write UI
+	- `Backbone.View`
+	- `React.Component`
 
 ---
 
+#### More goodies, further reading
+![](https://cdn-images-1.medium.com/max/800/1*v9AT7ZaJc6fR2MjYljGEzg.png) <!-- .element: height="100px" -->
 
+- [Rest](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/rest_parameters) and [spread](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Spread_operator)
+- [`Object.assign`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/assign)
+- [`Array.prototype.find`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/find), [`.includes`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/includes)
+- [`for (... of ...)`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/for...of)
+- [`Map`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map) / [`Set`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Set)
+- [Default parameters](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/Default_parameters)
 
-#### More highlights
-
-- `Object.keys` / `Object.values`
-- `Object.assign`
-- `Array.map`, `.filter`, `.find`, `.includes` (ES2016)
-- `for (... of ...)`
-- `Map` / `Set`
-- default parameters
-- Modules
 ---
 
-#### Browsers
+#### Path to Adoption: Browsers
 
 - Browser vendors are slow.
-- Most "good" browsers implement 80%+ of ES2015 spec
-	- Outliers: Safari 8, IE11
+- Most "good" browsers implement 90%+ of ES2015 spec
+	- Outliers in [edX support](http://edx.readthedocs.io/projects/edx-guide-for-students/en/latest/front_matter/browsers.html): Safari 9 (50%), IE11 (10%)
 - We can't write ES2015 and ship it to production, _yet_
 	- In the meantime, we'll use Babel
 
+http://kangax.github.io/compat-table/es6/ <!-- .element: class="light" -->
+![](https://i.bjacobel.com/20161020-4iigs.png)
+
 ---
 
-#### Babel
+### Path to Adoption: Babel
 
-- "Transpiles" code - e.g., ES2016 into ES5
-- uses presets and plugins - target specific features, or a spec version
-	- e.g., `babel-preset-es2015` or `babel-plugin-array-includes`
+- "Transpiles" ES2015 into ES5
 - Tightly integrated with tools like RequireJS, Karma, Webpack, etc
 - No compatibility issues with old libraries, because everything runs in ES5
-- Sets us up to gradually include features from ES2016 and ESNext
+- Removable once browser support reaches Good Enough (late 2017)
+
+![](https://raw.githubusercontent.com/babel/logo/master/babel.png) <!-- .element: height="300px" -->
 
 ---
 
+### Path to Adoption: Next Steps
 
-#### Community support
-- Most industry giants are using ES2015
-- Most schools/programs are teaching it
-- Most documentation/examples assume you're using it
-- Most popular open-source JS tools are written using it
-- Most JavaScript engineers are looking for jobs writing it
-- Community standard for a year or more, so buying in has effects on:
-	- Inclusiveness
-	- Hiring
-	- edX's image as a technology leader
+- Get involved!
+	- Start learning ES2015: https://babeljs.io/docs/learn-es2015/
+	- Give feedback on new styleguide version
+	- Use ES2015 for new code
+- ES2015 already supported:
+	- edx-ecommerce
+- ES2015 support WIP:
+	- edx-ui-toolkit
+	- edx-pattern-library
+	- edx-platform
+- Talk to your local friendly FedX rep
 
 ---
 
-
-#### Summary
+### Summary
 - Not a different language, just a better version of it
 - Gradual, compatible upgrade path (we've already started!)
-- Lets us build faster, easier, and with less head-scratching
+- Build faster, easier, and with less head-scratching
 - Aligns us with the community
-- Allows us to start reaching towards other modern FE tech like React
 - One of the most significant things we can do to modernize front-end tech at edX
+
+---
+
+## Questions?
+<!-- .element: class="imp" -->
+

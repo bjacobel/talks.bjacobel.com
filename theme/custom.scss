@@ -9,17 +9,42 @@
 
     img {
       border: none;
+      background: none;
+      box-shadow: none;
     }
 
-    pre code {
-      max-height: 700px;
+    pre {
+      code {
+        max-height: 700px;
+        font-size: 120%;
+        line-height: 120%;
+      }
+
+      &.left-code,
+      &.right-code {
+        width: calc(50% - 10px);
+      }
+
+      &.left-code {
+        float: left;
+        margin-right: 10px;
+      }
+
+      &.right-code {
+        float: right;
+        margin-left: 10px;
+      }
     }
 
     li {
       margin-bottom: 15px;
 
-      ul li {
-        font-size: 2rem;
+      ul {
+        margin-top: 15px;
+
+        li {
+          font-size: 2rem;
+        }
       }
     }
 
@@ -29,6 +54,10 @@
       justify-content:center;
       align-items:center;
       height:100%;
+    }
+
+    .light {
+      font-size: 65%;
     }
   }
 }
